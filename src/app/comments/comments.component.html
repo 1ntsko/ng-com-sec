@@ -1,0 +1,114 @@
+<ng-container *ngFor="let user of users; let i = index">
+  <div class="comment">
+    <div class="comment__votes">
+      <button class="comment__votes--plus btn" (click)="increase(i)">
+        &plus;
+      </button>
+      <div class="comment__votes--counter">{{ user.score }}</div>
+      <button class="comment__votes--minus btn" (click)="decrease(i)">
+        &minus;
+      </button>
+    </div>
+
+    <div class="comment__body">
+      <div class="comment__body--header">
+        <div class="profile-pic">
+          <img
+            src="./assets/{{ user.user.image.png }}"
+            alt="{{ user.user.username }}"
+          />
+        </div>
+        <div class="username">
+          {{ user.user.username }}
+        </div>
+        <div class="you" *ngIf="user.user.username === 'juliusomo'">you</div>
+        <div class="posted-time">
+          {{ user.createdAt }}
+        </div>
+        <div class="comment-btn">
+          <button
+            class="comment-btn__delete"
+            *ngIf="user.user.username === 'juliusomo'"
+            (click)="deleteFromComments(i)"
+          >
+            Delete
+          </button>
+          <button
+            class="comment-btn__reply"
+            *ngIf="user.user.username !== 'juliusomo'"
+            (click)="reply(i)"
+          >
+            &crarr; Reply
+          </button>
+          <button
+            class="comment-btn__reply"
+            *ngIf="user.user.username === 'juliusomo'"
+          >
+            &crarr; Edit
+          </button>
+        </div>
+      </div>
+      <div class="comment__body--content">
+        {{ user.content }}
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="reply-box comment"
+    *ngFor="let reply of user.replies; let i = index"
+  >
+    <div class="comment__votes">
+      <button class="comment__votes--plus btn" (click)="increase(i)">
+        &plus;
+      </button>
+      <div class="comment__votes--counter">{{ reply.score }}</div>
+      <button class="comment__votes--minus btn" (click)="decrease(i)">
+        &minus;
+      </button>
+    </div>
+
+    <div class="comment__body">
+      <div class="comment__body--header">
+        <div class="profile-pic">
+          <img
+            src="./assets/{{ reply.user.image.png }}"
+            alt="{{ user.user.username }}"
+          />
+        </div>
+        <div class="username">
+          {{ reply.user.username }}
+        </div>
+        <div class="you" *ngIf="reply.user.username === 'juliusomo'">you</div>
+        <div class="posted-time">
+          {{ reply.createdAt }}
+        </div>
+        <div class="comment-btn">
+          <button
+            class="comment-btn__delete"
+            *ngIf="reply.user.username === 'juliusomo'"
+            (click)="deleteFromReplies(i)"
+          >
+            Delete
+          </button>
+          <button
+            class="comment-btn__reply"
+            *ngIf="reply.user.username !== 'juliusomo'"
+          >
+            &crarr; Reply
+          </button>
+          <button
+            class="comment-btn__reply"
+            *ngIf="reply.user.username === 'juliusomo'"
+          >
+            &crarr; Edit
+          </button>
+        </div>
+      </div>
+      <div class="comment__body--content">
+        <span class="replyingTO">@{{ reply.replyingTo }}</span>
+        {{ reply.content }}
+      </div>
+    </div>
+  </div>
+</ng-container>

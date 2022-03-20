@@ -1,0 +1,130 @@
+.comment {
+  display: flex;
+  border-radius: 1rem;
+  background-color: #fff;
+  gap: 2.5rem;
+  padding: 2.5rem;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  width: 73.5rem;
+  font-size: 1.6rem;
+
+  &__votes {
+    display: flex;
+    flex-direction: column;
+    background-color: #f5f6fa;
+    border-radius: 1rem;
+    height: max-content;
+    justify-content: center;
+    padding: 0.8rem 1.2rem 1rem;
+
+    .btn {
+      background-color: transparent;
+      border: 0;
+      cursor: pointer;
+      color: gray;
+      font-size: 1.5rem;
+    }
+
+    &--counter {
+      color: #5457b6;
+      font-size: 2rem;
+      margin-block: 0.8rem;
+      font-weight: 500;
+    }
+  }
+
+  &__body {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: max-content;
+    padding: 0.8rem 1.2rem 1rem;
+
+    &--header {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start !important;
+
+      .you {
+        background-color: #5457b6;
+        border-radius: 0.3rem;
+        color: white;
+        font-weight: 400;
+        margin-left: 1rem;
+        padding: 0.2rem 1rem 0.3rem;
+      }
+
+      .profile-pic {
+        img {
+          border-radius: 50%;
+          height: 3rem;
+          width: 3rem;
+          margin-right: 1rem;
+        }
+      }
+
+      .username {
+        color: #324152;
+        font-weight: 500;
+      }
+
+      .posted-time {
+        color: #67727e;
+        margin-left: 1.5rem;
+      }
+
+      .comment-btn {
+        display: flex;
+        align-items: center;
+        gap: 0.7rem;
+        margin-left: auto;
+
+        &__reply {
+          display: flex;
+          align-items: center;
+          border: none;
+          border-radius: 0.5rem;
+          color: #5457b6;
+          font-weight: 700;
+          gap: 0.5rem;
+          padding: 0.5rem;
+          background: none;
+          font-size: 1.6rem;
+          cursor: pointer;
+        }
+
+        &__delete {
+          cursor: pointer;
+          border-radius: 0.5rem;
+          background: none;
+          border: none;
+          color: #ed6468;
+          font-weight: 700;
+          gap: 0.5rem;
+          padding: 0.5rem;
+          font-size: 1.6rem;
+        }
+      }
+    }
+
+    &--content {
+      word-wrap: break-word;
+      color: #67727e;
+      line-height: 1.5;
+      width: 100%;
+      font-size: 1.6rem;
+
+      .replyingTO {
+        color: #5457b6;
+        font-weight: 700;
+        margin-right: 1rem;
+      }
+    }
+  }
+}
+
+.reply-box {
+  width: 60rem;
+  margin-left: auto;
+}

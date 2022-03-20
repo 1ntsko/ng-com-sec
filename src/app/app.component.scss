@@ -1,1 +1,11 @@
-@import "../sass/abstracts/variables";
+@import "../sass/abstracts/mixins";
+@import "../sass/abstracts/mixins";
+
+#container {
+  @include flex;
+  flex-direction: column;
+  width: 100vw;
+  min-height: 100vh;
+  gap: 2rem;
+  padding: 3rem;
+}

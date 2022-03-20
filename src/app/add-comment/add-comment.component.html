@@ -1,0 +1,13 @@
+<div class="add-comment">
+  <div class="add-comment__picture">
+    <img src="{{ imgPath }}" alt="{{ username }}" />
+  </div>
+
+  <textarea
+    [(ngModel)]="message"
+    class="add-comment__input"
+    placeholder="Add a comment"
+  ></textarea>
+
+  <button class="add-comment__send-btn" (click)="addComment()">Send</button>
+</div>
