@@ -54,6 +54,22 @@
     </div>
   </div>
 
+  <div class="add-comment" *ngIf="isReplyActive">
+    <div class="add-comment__picture">
+      <img src="./assets/{{ currentUser.image.png }}" alt="" />
+    </div>
+
+    <textarea
+      [(ngModel)]="message"
+      class="add-comment__input"
+      placeholder="Add a comment"
+    ></textarea>
+
+    <button class="add-comment__send-btn" (click)="updateComment(i)">
+      Update
+    </button>
+  </div>
+
   <div
     class="reply-box comment"
     *ngFor="let reply of user.replies; let i = index"

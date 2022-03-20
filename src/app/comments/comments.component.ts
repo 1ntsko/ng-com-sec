@@ -22,6 +22,8 @@ export class CommentsComponent implements OnInit {
   users = data.comments.sort((a: any, b: any) => b.score - a.score);
   currentUser = data.currentUser;
 
+  isReplyActive: boolean = false;
+
   constructor(private comment: MessageService) {}
 
   ngOnInit(): void {
@@ -29,7 +31,7 @@ export class CommentsComponent implements OnInit {
       (message) => (this.message = message)
     );
 
-    console.log(this.users);
+    console.log(this.currentUser);
   }
 
   increase(index: number) {
@@ -52,5 +54,12 @@ export class CommentsComponent implements OnInit {
   reply(index: number) {
     console.log(this.users[index]);
     console.log(this.message);
+    this.isReplyActive = true;
+  }
+
+  updateComment(index: any) {
+    // this.isReplyActive = false;
+    // const bla = index.closest()
+    console.log(index.nodeName);
   }
 }

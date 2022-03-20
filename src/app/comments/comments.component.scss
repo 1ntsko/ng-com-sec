@@ -1,3 +1,5 @@
+@import "/src/sass/components/input";
+
 .comment {
   display: flex;
   border-radius: 1rem;
@@ -125,6 +127,18 @@
 }
 
 .reply-box {
-  width: 60rem;
+  width: 63rem;
   margin-left: auto;
+  position: relative;
+
+  &::before {
+    content: "";
+    width: 0.1rem;
+    height: 100%;
+    background-color: black;
+    opacity: 0.1;
+    top: 0;
+    left: -9%;
+    position: absolute;
+  }
 }
