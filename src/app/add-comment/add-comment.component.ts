@@ -1,17 +1,16 @@
-import { MessageService } from './../comment-service/comment.service';
-import { Component, OnInit } from '@angular/core';
-import { default as data } from '/src/data.json';
-// import { MessageService } from '../comment-service/comment.service';
+import { MessageService } from "./../comment-service/comment.service";
+import { Component, OnInit } from "@angular/core";
+import { default as data } from "/src/data.json";
 
 @Component({
-  selector: 'app-add-comment',
-  templateUrl: './add-comment.component.html',
-  styleUrls: ['./add-comment.component.scss'],
+  selector: "app-add-comment",
+  templateUrl: "./add-comment.component.html",
+  styleUrls: ["./add-comment.component.scss"],
 })
 export class AddCommentComponent implements OnInit {
   imgPath: string = `./assets/${data.currentUser.image.png}`;
   username: string = `./assets/${data.currentUser.username}`;
-  message = '';
+  message: string = "";
 
   constructor(private comment: MessageService) {}
 
@@ -19,8 +18,6 @@ export class AddCommentComponent implements OnInit {
     this.comment.currentMessage.subscribe(
       (message) => (this.message = message)
     );
-
-    console.log(data.currentUser);
   }
 
   addComment() {
@@ -32,15 +29,11 @@ export class AddCommentComponent implements OnInit {
       score: 0,
       user: {
         image: {
-          png: './images/avatars/image-juliusomo.png',
+          png: "./images/avatars/image-juliusomo.png",
         },
         username: data.currentUser.username,
       },
     });
-    this.message = '';
-    console.log(data);
-    // this.comment.changeMessage(newComment);
-    console.log(this.message);
-    // console.log(newComment);
+    this.message = "";
   }
 }

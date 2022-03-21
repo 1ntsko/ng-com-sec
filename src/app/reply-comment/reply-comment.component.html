@@ -1,0 +1,16 @@
+<div class="add-comment">
+  <div class="add-comment__picture">
+    <img
+      src="../../assets/images/avatars/image-juliusomo.png"
+      alt="image-juliusomo"
+    />
+  </div>
+
+  <textarea
+    [(ngModel)]="message"
+    class="add-comment__input"
+    placeholder="Add a comment"
+  ></textarea>
+
+  <button class="add-comment__send-btn" (click)="reply()">Reply</button>
+</div>

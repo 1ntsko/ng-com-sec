@@ -1,0 +1,69 @@
+<div class="comment">
+  <div class="comment__votes">
+    <button class="comment__votes--plus btn" (click)="changeScore('plus')">
+      &plus;
+    </button>
+    <div class="comment__votes--counter">{{ comment.score }}</div>
+    <button class="comment__votes--minus btn" (click)="changeScore('minus')">
+      &minus;
+    </button>
+  </div>
+
+  <div class="comment__body">
+    <div class="comment__body--header">
+      <div class="profile-pic">
+        <img
+          src="./assets/{{ comment.user.image.png }}"
+          alt="{{ comment.user.username }}"
+        />
+      </div>
+      <div class="username">
+        {{ comment.user.username }}
+      </div>
+      <div class="you" *ngIf="comment.user.username === 'juliusomo'">you</div>
+      <div class="posted-time">
+        {{ comment.createdAt }}
+      </div>
+      <div class="comment-btn">
+        <button
+          class="comment-btn__delete"
+          *ngIf="comment.user.username === 'juliusomo'"
+          (click)="deleteComment()"
+        >
+          Delete
+        </button>
+        <button
+          (click)="toggleReply()"
+          class="comment-btn__reply"
+          *ngIf="comment.user.username !== 'juliusomo'"
+        >
+          &crarr; Reply
+        </button>
+        <button
+          class="comment-btn__reply"
+          *ngIf="comment.user.username === 'juliusomo'"
+          (click)="makeEditable()"
+        >
+          <span *ngIf="!isEditable">&crarr; Edit</span>
+          <span *ngIf="isEditable">&checkmark; Done</span>
+        </button>
+      </div>
+    </div>
+    <div class="comment__body--content" [attr.contenteditable]="isEditable">
+      {{ comment.content }}
+    </div>
+  </div>
+</div>
+
+<app-reply-comment
+  *ngIf="isReplyActive"
+  (onReplySend)="handleReplyComment($event)"
+></app-reply-comment>
+
+<app-reply-item
+  *ngFor="let reply of comment.replies; let i = index"
+  (onReplyScoreChange)="handleReplyScore($event)"
+  (onDeleteReply)="deleteReplyHandler(i)"
+  class="reply-box comment"
+  [reply]="reply"
+></app-reply-item>

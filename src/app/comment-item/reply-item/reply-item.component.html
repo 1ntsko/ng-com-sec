@@ -1,0 +1,51 @@
+<div class="comment__votes">
+  <button class="comment__votes--plus btn" (click)="changeReplyScore('plus')">
+    &plus;
+  </button>
+  <div class="comment__votes--counter">{{ reply.score }}</div>
+  <button class="comment__votes--minus btn" (click)="changeReplyScore('minus')">
+    &minus;
+  </button>
+</div>
+
+<div class="comment__body">
+  <div class="comment__body--header">
+    <div class="profile-pic">
+      <img src="./assets/{{ reply.user.image.png }}" />
+    </div>
+    <div class="username">
+      {{ reply.user.username }}
+    </div>
+    <div class="you" *ngIf="reply.user.username === 'juliusomo'">you</div>
+    <div class="posted-time">
+      {{ reply.createdAt }}
+    </div>
+    <div class="comment-btn">
+      <button
+        class="comment-btn__delete"
+        *ngIf="reply.user.username === 'juliusomo'"
+        (click)="deleteReplyComment()"
+      >
+        Delete
+      </button>
+      <button
+        class="comment-btn__reply"
+        *ngIf="reply.user.username !== 'juliusomo'"
+      >
+        &crarr; Reply
+      </button>
+      <button
+        class="comment-btn__reply"
+        *ngIf="reply.user.username === 'juliusomo'"
+        (click)="makeEditable()"
+      >
+        <span *ngIf="!isEditable">&crarr; Edit</span>
+        <span *ngIf="isEditable">&checkmark; Done</span>
+      </button>
+    </div>
+  </div>
+  <div class="comment__body--content" [attr.contenteditable]="isEditable">
+    <span class="replyingTO">@{{ reply.replyingTo }}</span>
+    {{ reply.content }}
+  </div>
+</div>

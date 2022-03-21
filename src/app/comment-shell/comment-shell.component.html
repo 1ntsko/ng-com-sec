@@ -1,0 +1,9 @@
+<ng-container *ngFor="let commentItem of comments; let i = index">
+  <app-comment-item
+    (onReplyText)="handleReplyContent($event)"
+    (onReplyScore)="handleOnReplyScoreChange($event)"
+    (onChangeScore)="changeScoreHandler($event)"
+    (onDeleteComment)="deleteCommentHandler(i)"
+    [comment]="commentItem"
+  ></app-comment-item>
+</ng-container>
