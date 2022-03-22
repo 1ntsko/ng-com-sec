@@ -24,6 +24,7 @@ export class CommentShellComponent implements OnInit {
   comments =
     this.storageService.get(KEY) ||
     data.comments.sort((a: any, b: any) => b.score - a.score);
+
   currentUser = data.currentUser;
   isReplyActive: boolean = false;
 
