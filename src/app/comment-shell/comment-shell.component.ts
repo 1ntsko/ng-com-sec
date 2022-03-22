@@ -1,3 +1,4 @@
+import { StorageService } from "./../storage-service/localStorage.service";
 import { MessageService } from "../comment-service/comment.service";
 import { Component, OnInit } from "@angular/core";
 import { default as data } from "/src/data.json";
@@ -11,6 +12,8 @@ interface User {
   replyingTo: string;
 }
 
+const KEY = "userComment";
+
 @Component({
   selector: "app-comment-shell",
   templateUrl: "./comment-shell.component.html",
@@ -18,11 +21,16 @@ interface User {
 })
 export class CommentShellComponent implements OnInit {
   message = {};
-  comments = data.comments.sort((a: any, b: any) => b.score - a.score);
+  comments =
+    this.storageService.get(KEY) ||
+    data.comments.sort((a: any, b: any) => b.score - a.score);
   currentUser = data.currentUser;
   isReplyActive: boolean = false;
 
-  constructor(private comment: MessageService) {}
+  constructor(
+    private comment: MessageService,
+    private storageService: StorageService
+  ) {}
 
   ngOnInit(): void {
     this.comment.currentMessage.subscribe(
@@ -40,6 +48,8 @@ export class CommentShellComponent implements OnInit {
         if (item.score > 0) item.score--;
       }
     });
+
+    this.refreshStorage();
   }
 
   handleOnReplyScoreChange(data: any) {
@@ -55,7 +65,7 @@ export class CommentShellComponent implements OnInit {
       });
     });
 
-    // localStorage.setItem('bla', this.comments);
+    this.refreshStorage();
   }
 
   handleReplyContent(data: any) {
@@ -70,6 +80,7 @@ export class CommentShellComponent implements OnInit {
     };
 
     toReplyUser.replies.push(reply);
+    this.refreshStorage();
   }
 
   calculateId() {
@@ -90,5 +101,23 @@ export class CommentShellComponent implements OnInit {
 
   deleteCommentHandler(id: number) {
     this.comments.splice(id, 1);
+    this.refreshStorage();
+  }
+
+  onMainCommentHandler(content: string) {
+    this.comments.push({
+      id: this.calculateId(),
+      content: content,
+      createdAt: `${new Date().toLocaleDateString()}`,
+      replies: [],
+      score: 0,
+      user: this.currentUser,
+    });
+    console.log(this.comments);
+    this.refreshStorage();
+  }
+
+  refreshStorage() {
+    this.storageService.set(KEY, this.comments);
   }
 }

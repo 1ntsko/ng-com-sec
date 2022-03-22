@@ -7,3 +7,6 @@
     [comment]="commentItem"
   ></app-comment-item>
 </ng-container>
+<app-add-comment
+  (onMainComment)="onMainCommentHandler($event)"
+></app-add-comment>
