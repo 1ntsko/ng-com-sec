@@ -1,23 +1,23 @@
-import { StorageService } from "./../storage-service/localStorage.service";
-import { MessageService } from "../comment-service/comment.service";
-import { Component, OnInit } from "@angular/core";
-import { default as data } from "/src/data.json";
+import { StorageService } from './../storage-service/localStorage.service';
+import { MessageService } from '../comment-service/comment.service';
+import { Component, OnInit } from '@angular/core';
+import { default as data } from '/src/data.json';
 
 interface User {
   content: string;
-  createdAt: number;
+  createdAt: string;
   id: number;
   score: number;
   user: string;
   replyingTo: string;
 }
 
-const KEY = "userComment";
+const KEY = 'userComment';
 
 @Component({
-  selector: "app-comment-shell",
-  templateUrl: "./comment-shell.component.html",
-  styleUrls: ["./comment-shell.component.scss"],
+  selector: 'app-comment-shell',
+  templateUrl: './comment-shell.component.html',
+  styleUrls: ['./comment-shell.component.scss'],
 })
 export class CommentShellComponent implements OnInit {
   message = {};
@@ -42,7 +42,7 @@ export class CommentShellComponent implements OnInit {
   changeScoreHandler(data: any) {
     this.comments.forEach((item: any) => {
       if (item.id == data.id) {
-        if (data.type == "plus") {
+        if (data.type == 'plus') {
           item.score++;
           return;
         }
@@ -57,7 +57,7 @@ export class CommentShellComponent implements OnInit {
     this.comments.forEach((item: any) => {
       item.replies.forEach((reply: any) => {
         if (reply.id == data.id) {
-          if (data.type == "plus") {
+          if (data.type == 'plus') {
             ++reply.score;
             return;
           }
@@ -74,7 +74,7 @@ export class CommentShellComponent implements OnInit {
     const reply: User = {
       id: this.calculateId(),
       content: data.content,
-      createdAt: new Date().getDate(),
+      createdAt: new Date().toLocaleTimeString(),
       score: 0,
       user: this.currentUser,
       replyingTo: toReplyUser.user.username,
