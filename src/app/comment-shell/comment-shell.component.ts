@@ -109,7 +109,7 @@ export class CommentShellComponent implements OnInit {
     this.comments.push({
       id: this.calculateId(),
       content: content,
-      createdAt: `${new Date().toLocaleDateString()}`,
+      createdAt: `${new Date().toLocaleTimeString()}`,
       replies: [],
       score: 0,
       user: this.currentUser,
